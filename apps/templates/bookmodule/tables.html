@@ -1,0 +1,80 @@
+{% extends "layouts/base.html" %}
+{% load static %}
+
+{% block title %} HTML5 Tables {% endblock title %}
+
+{% block content %}
+<center>
+  <!-- table 1 -->
+  <caption style="font-size: 20px;"><strong>Table 1: Table <br> of Fruits and <br> Their Prices</strong></caption>
+  <table border="1">
+    <tr>
+      <th>Fruit</th>
+      <th>Price</th>
+    </tr>
+    <tr>
+      <td>Apple</td>
+      <td>$0.25</td>
+    </tr>
+    <tr>
+      <td>Orange</td>
+      <td>$0.50</td>
+    </tr>
+    <tr>
+      <td>Banana</td>
+      <td>$1.00</td>
+    </tr>
+    <tr>
+      <td>Pineapple</td>
+      <td>$2.00</td>
+    </tr>
+    <tr>
+      <th>Total</th>
+      <th>$3.75</th>
+    </tr>
+  </table>
+
+  <br><br>
+
+  <!-- table 2 -->
+  <table border="1" style="width: 90%; margin: auto; border-collapse: collapse; text-align: center;">
+  
+    <caption style="font-size: 18px;">Table 2: A more complex sample table</caption>
+    <tr>
+        <td rowspan="2" colspan="1" style="width: 35%;">
+            <img src="{% static 'desert.jpg' %}" alt="Desert Image" width="300" height="200">
+        </td>
+        <td colspan="4" style="font-weight: bold; font-size: 18px;">
+            Camelid comparison <br>Approximate as of 6/2011
+        </td>
+    </tr>
+    <tr>
+        <th># of humps</th>
+        <th>Indigenous region</th>
+        <th>Spits?</th>
+        <th>Produces wool?</th>
+    </tr>
+    <tr>
+        <td><strong>Dromedary</strong></td>
+        <td>1</td>
+        <td>Arabian Peninsula</td>
+        <td>Yes</td>
+        <td>Yes</td>
+    </tr>
+    <tr>
+        <td><strong>Camels (bactrian)</strong></td>
+        <td>2</td>
+        <td>Africa/Asia</td>
+        <td>Yes</td>
+        <td>Yes</td>
+    </tr>
+    <tr>
+        <td><strong>Llamas</strong></td>
+        <td>1</td>
+        <td>Andes Mountains</td>
+        <td>Yes</td>
+        <td>Yes</td>
+    </tr>
+</table>
+</center>
+{% endblock content %}

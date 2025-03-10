@@ -25,3 +25,16 @@ def viewbook(request, bookId):
     if book2['id'] == bookId: targetBook = book2
     context = {'book':targetBook} # book is the variable name accessible by the template
     return render(request, 'bookmodule/show.html', context)
+
+def html5_links(request):
+    return render(request, "bookmodule/links.html")
+
+def text_formatting(request):
+    return render(request, 'bookmodule/formatting.html')
+
+def listing(request):
+    return render(request, "bookmodule/listing.html")
+
+def tables(request):
+    return render(request, 'bookmodule/tables.html')
+
