@@ -1,0 +1,24 @@
+{% extends "layouts/base.html" %}
+
+{% block title %} Book List {% endblock title %}
+
+{% block content %}
+    <h2 class="page-title">Filtered Book Results</h2>
+
+    {% if books %}
+        <ul class="book-list">
+            {% for book in books %}
+                <li class="book-item">
+                    <p><strong>ID:</strong> {{ book.id }}</p>
+                    <p><strong>Title:</strong> {{ book.title }}</p>
+                    <p><strong>Author:</strong> {{ book.author }}</p>
+                    <p><strong>Price:</strong> {{ book.price }}</p>
+                    <p><strong>Edition:</strong> {{ book.edition }}</p>
+                    <hr>
+                </li>
+            {% endfor %}
+        </ul>
+    {% else %}
+        <p class="no-results">No books matched your search criteria.</p>
+    {% endif %}
+{% endblock content %}
