@@ -1,6 +1,12 @@
 from django.shortcuts import render
 from django.http import HttpResponse
 from .models import Book
+from django.db.models import Q
+from django.db.models import Count, Sum, Avg, Max, Min
+from django.db.models import Count
+from django.shortcuts import render
+from .models import Address
+from .models import Student
 
 def index(request):
       return render(request, "bookmodule/index.html")
@@ -82,3 +88,39 @@ def complex_query(request):
         return render(request, 'bookmodule/bookList.html', {'books':mybooks})
     else:
         return render(request, 'bookmodule/index.html')
+
+def lab8_task1(request):
+    books = Book.objects.filter(Q(price__lte=80))
+    return render(request, 'bookmodule/lab8_task1.html', {'books': books})
+
+def lab8_task2(request):
+    books = Book.objects.filter(
+        Q(edition__gt=3) & (Q(title__icontains='co') | Q(author__icontains='co'))
+    )
+    return render(request, 'bookmodule/lab8_task2.html', {'books': books})
+
+def lab8_task3(request):
+    books = Book.objects.filter(
+        Q(edition__lte=3) & ~(
+            Q(title__icontains='co') | Q(author__icontains='co')
+        )
+    )
+    return render(request, 'bookmodule/lab8_task3.html', {'books': books})
+
+def lab8_task4(request):
+    books = Book.objects.order_by('title')
+    return render(request, 'bookmodule/lab8_task4.html', {'books': books})
+
+def lab8_task5(request):
+    stats = Book.objects.aggregate(
+        total_books=Count('id'),
+        total_price=Sum('price'),
+        average_price=Avg('price'),
+        max_price=Max('price'),
+        min_price=Min('price')
+    )
+    return render(request, 'bookmodule/lab8_task5.html', {'stats': stats})
+
+def lab8_task7(request):
+    city_counts = Address.objects.annotate(num_students=Count('student'))
+    return render(request, 'bookmodule/lab8_task7.html', {'city_counts': city_counts})

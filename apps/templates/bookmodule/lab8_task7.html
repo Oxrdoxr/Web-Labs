@@ -1,0 +1,8 @@
+<h2>Number of Students per City</h2>
+<ul>
+  {% for item in city_counts %}
+    <li>{{ item.city }} — {{ item.num_students }} student(s)</li>
+  {% empty %}
+    <li>No data available.</li>
+  {% endfor %}
+</ul>

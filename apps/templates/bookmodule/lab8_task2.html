@@ -1,0 +1,14 @@
+{% extends "layouts/base.html" %}
+
+{% block content %}
+<h2>Books with Edition > 3 and Title or Author Contains 'co'</h2>
+{% for book in books %}
+    <p><strong>ID:</strong> {{ book.id }}</p>
+    <p><strong>Title:</strong> {{ book.title }}</p>
+    <p><strong>Author:</strong> {{ book.author }}</p>
+    <p><strong>Edition:</strong> {{ book.edition }}</p>
+    <hr>
+{% empty %}
+    <p>No matching books found.</p>
+{% endfor %}
+{% endblock %}
