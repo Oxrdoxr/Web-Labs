@@ -1,0 +1,7 @@
+{% for dept in departments %}
+    <p><strong>Department:</strong> {{ dept.name }}</p>
+    <p><strong>Oldest Student:</strong> {{ dept.oldest_student_name }}</p>
+    <hr>
+{% empty %}
+    <p>No data available.</p>
+{% endfor %}

@@ -1,0 +1,11 @@
+{% extends "layouts/base.html" %}
+{% block content %}
+    <h2>Departments with More Than 2 Students</h2>
+    <ul>
+        {% for dept in departments %}
+            <li>{{ dept.name }} – {{ dept.num_students }} students</li>
+        {% empty %}
+            <li>No departments with more than 2 students.</li>
+        {% endfor %}
+    </ul>
+{% endblock %}
