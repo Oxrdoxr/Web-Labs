@@ -142,13 +142,13 @@ def lab9_task2(request):
     return render(request, 'bookmodule/lab9_task2.html', {'courses': courses})
 
 def lab9_task3(request):
-    oldest_students = Department.objects.annotate(
-        oldest_id=Min('students__id'))
+    departments = Department.objects.annotate(oldest_id=Min('students__id'))
+    return render(request, 'bookmodule/lab9_task3.html', {'departments': departments})
+
 
 def lab9_task4(request):
-    departments = Department.objects.annotate(num_students=Count('student')).filter(
-        num_students__gt=2
-    ).order_by('-num_students')
+    departments = Department.objects.annotate(num_students=Count('students')).filter(
+        num_students__gt=2).order_by('-num_students')
 
     return render(request, 'bookmodule/lab9_task4.html', {'departments': departments})
 

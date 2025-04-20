@@ -38,7 +38,7 @@ class Student(models.Model):
     age = models.IntegerField()
     address = models.ForeignKey(Address, on_delete=models.CASCADE)
     card = models.OneToOneField(Card, on_delete=models.CASCADE, null=True, blank=True)
-    department = models.ForeignKey(Department, on_delete=models.CASCADE, null=True)
+    department = models.ForeignKey(Department, on_delete=models.CASCADE, related_name='students', null=True)
     course = models.ManyToManyField(Course, related_name='students', blank=True)
 
 
