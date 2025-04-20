@@ -10,6 +10,10 @@ from .models import Address
 from .models import Student
 from .models import Department
 from .models import Course
+from django.shortcuts import get_object_or_404, redirect
+from .forms import BookForm
+
+
 
 
 def index(request):
@@ -137,28 +141,9 @@ def lab9_task2(request):
     courses = Course.objects.annotate(num_students=Count('students'))
     return render(request, 'bookmodule/lab9_task2.html', {'courses': courses})
 
-#def lab9_task3(request):
-    oldest_students = Student.objects.values('department__name').annotate(
-        oldest_id=Min('id')
-    )
-
-    result = []
-    for item in oldest_students:
-        student = Student.objects.get(id=item['oldest_id'])
-        result.append({
-            'department': item['department__name'],
-            'student_name': student.name,
-            'student_id': student.id
-        })
-
-    return render(request, 'bookmodule/lab9_task3.html', {'students': result})
-
 def lab9_task3(request):
-    students = Student.objects.filter(department=OuterRef('pk')).order_by('id')
-    data = Department.objects.annotate(
-        oldest_student_name=Subquery(students.values('name')[:1])
-    )
-    return render(request, 'bookmodule/lab9_task3.html', {'departments': data})
+    oldest_students = Department.objects.annotate(
+        oldest_id=Min('students__id'))
 
 def lab9_task4(request):
     departments = Department.objects.annotate(num_students=Count('student')).filter(
@@ -166,3 +151,4 @@ def lab9_task4(request):
     ).order_by('-num_students')
 
     return render(request, 'bookmodule/lab9_task4.html', {'departments': departments})
+

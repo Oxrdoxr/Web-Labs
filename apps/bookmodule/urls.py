@@ -23,6 +23,6 @@ urlpatterns = [
     path('lab9/task2', views.lab9_task2, name='lab9_task2'),
     path('lab9/task3', views.lab9_task3, name='lab9_task3'),
     path('lab9/task4', views.lab9_task4, name='lab9_task4'),
-
+    
 ]
 

@@ -1,0 +1,16 @@
+{% extends "layouts/base.html" %}
+{% block content %}
+<h2>Book List (with Django Form)</h2>
+<a href="{% url 'lab9_part2_add_book' %}">Add New Book</a>
+<ul>
+    {% for book in books %}
+        <li>
+            {{ book.title }} – {{ book.author }} – {{ book.price }} – Edition {{ book.edition }}
+            <a href="{% url 'lab9_part2_edit_book' book.id %}">Edit</a>
+            <a href="{% url 'lab9_part2_delete_book' book.id %}">Delete</a>
+        </li>
+    {% empty %}
+        <li>No books available.</li>
+    {% endfor %}
+</ul>
+{% endblock %}
