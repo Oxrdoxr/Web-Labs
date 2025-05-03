@@ -1,0 +1,15 @@
+<h1>Profiles</h1>
+<ul>
+{% for profile in profiles %}
+    <li>
+        {{ profile.name }}
+        {% if profile.image %}
+            <img src="{{ profile.image.url }}" width="100">
+        {% else %}
+            <p>No image available.</p>
+        {% endif %}
+    </li>
+{% empty %}
+    <li>No profiles found.</li>
+{% endfor %}
+</ul>

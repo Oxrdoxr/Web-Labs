@@ -1,5 +1,7 @@
 from django.urls import path
 from . import views
+from django.conf import settings
+from django.conf.urls.static import static
 
 urlpatterns = [
     path('', views.index, name= "books.index"),
@@ -31,5 +33,17 @@ urlpatterns = [
     path('lab9_part2/addbook', views.lab9_part2_add_book, name='lab9_part2_add_book'),
     path('lab9_part2/editbook/<int:id>', views.lab9_part2_edit_book, name='lab9_part2_edit_book'),
     path('lab9_part2/deletebook/<int:id>', views.lab9_part2_delete_book, name='lab9_part2_delete_book'),
+    path('students/list/', views.student_list, name='student_list'),
+    path('students/add/', views.student_add, name='student_add'),
+    path('students/edit/<int:pk>/', views.student_edit, name='student_edit'),
+    path('students/delete/<int:pk>/', views.student_delete, name='student_delete'),
+    path('lab11_part2/liststudents', views.list_students2, name='list_students2'),
+    path('lab11_part2/addstudent', views.add_student2, name='add_student2'),
+    path('lab11_part2/editstudent/<int:id>/', views.edit_student2, name='edit_student2'),
+    path('lab11_part2/deletestudent/<int:id>/', views.delete_student2, name='delete_student2'),
+    path('lab11_part3/addprofile', views.add_profile, name='add_profile'),
+    path('lab11_part3/listprofiles', views.list_profiles, name='list_profiles'),
 ]
 
+if settings.DEBUG:
+    urlpatterns += static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)

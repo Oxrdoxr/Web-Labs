@@ -1,0 +1,21 @@
+{% extends "layouts/base.html" %}
+{% block content %}
+<h2>Student2 List (Many-to-Many Addresses)</h2>
+<a href="{% url 'add_student2' %}">Add New Student</a>
+<ul>
+    {% for student in students %}
+        <li>
+            {{ student.name }} – {{ student.age }}
+            <ul>
+                {% for address in student.addresses.all %}
+                    <li>{{ address.city }}</li>
+                {% endfor %}
+            </ul>
+            <a href="{% url 'edit_student2' student.id %}">Edit</a> |
+            <a href="{% url 'delete_student2' student.id %}">Delete</a>
+        </li>
+    {% empty %}
+        <li>No students available.</li>
+    {% endfor %}
+</ul>
+{% endblock %}
