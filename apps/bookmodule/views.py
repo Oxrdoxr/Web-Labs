@@ -10,6 +10,14 @@ from .models import Address, Student, Department, Course, Student2, Profile
 from django.shortcuts import get_object_or_404, redirect
 from .forms import BookForm
 from .forms import StudentForm, Student2Form, ProfileForm
+from .forms import RegisterForm
+from django.contrib import messages
+from django.contrib.auth import authenticate, login
+from django.contrib import messages
+from django.contrib.auth.decorators import login_required
+from django.contrib.auth import logout
+
+
 
 def index(request):
       return render(request, "bookmodule/index.html")
@@ -147,6 +155,7 @@ def lab9_task4(request):
 
     return render(request, 'bookmodule/lab9_task4.html', {'departments': departments})
 
+@login_required(login_url='/books/lab12/login')
 def list_books(request):
     books = Book.objects.all()
     return render(request, 'bookmodule/lab9_part1_list.html', {'books': books})
@@ -293,3 +302,29 @@ def list_profiles(request):
     profiles = Profile.objects.all()
     return render(request, 'bookmodule/part3_listprofiles.html', {'profiles': profiles})
 
+def register(request):
+    if request.method == 'POST':
+        form = RegisterForm(request.POST)
+        if form.is_valid():
+            form.save()
+            messages.success(request, 'Registration successful. You can now log in.')
+            return redirect('register')  # أو توجهه لصفحة login مثلاً
+    else:
+        form = RegisterForm()
+    return render(request, 'bookmodule/register.html', {'form': form})
+
+def login_user(request):
+    if request.method == 'POST':
+        username = request.POST['username']
+        password = request.POST['password']
+        user = authenticate(username=username, password=password)
+        if user is not None:
+            login(request, user)
+            return redirect('list_books')  # أو أي صفحة رئيسية تابعة للمستخدم
+        else:
+            return render(request, 'bookmodule/login.html', {'error': 'Invalid credentials'})
+    return render(request, 'bookmodule/login.html')
+
+def logout_user(request):
+    logout(request)
+    return redirect('login')

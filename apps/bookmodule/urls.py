@@ -43,6 +43,11 @@ urlpatterns = [
     path('lab11_part2/deletestudent/<int:id>/', views.delete_student2, name='delete_student2'),
     path('lab11_part3/addprofile', views.add_profile, name='add_profile'),
     path('lab11_part3/listprofiles', views.list_profiles, name='list_profiles'),
+    path('lab12/register', views.register, name='register'),
+    path('lab12/login', views.login_user, name='login'),
+    path('lab12/login/', views.logout_user, name='login'),
+
+
 ]
 
 if settings.DEBUG:
